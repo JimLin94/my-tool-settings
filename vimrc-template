@@ -1,0 +1,242 @@
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'Chiel92/vim-autoformat'
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+" Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'gmarik/Vundle.vim'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Install L9 and avoid a Naming conflict if you've already installed a
+" different version somewhere else.
+" Plugin 'ascenator/L9', {'name': 'newL9'}
+Plugin 'christoomey/vim-system-copy'
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+let g:airline_theme='onedark'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+
+if has("gui_running")
+   let s:uname = system("uname")
+   if s:uname == "Darwin\n"
+      set guifont=Meslo\ LG\ S\ for\ Powerline
+   endif
+endif
+let g:airline_powerline_fonts = 1
+
+Plugin 'vim-ctrlspace/vim-ctrlspace'
+set nocompatible
+set hidden
+if has("gui_running")
+    " Settings for MacVim and Inconsolata font
+    let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+endif
+
+Plugin 'scrooloose/nerdtree'
+let NERDTreeShowHidden=1
+
+Plugin 'valloric/youcompleteme'
+" Start autocompletion after 4 chars
+let g:ycm_min_num_of_chars_for_completion = 4
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_enable_diagnostic_highlighting = 0
+" ~/.tern-config for enable javascript auocomplete
+
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_max_files=0
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+let g:ctrlp_max_depth=40
+
+Plugin 'dracula/vim'
+syntax on
+"color dracula
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+Plugin 'pangloss/vim-javascript'
+let g:javascript_plugin_jsdoc = 1
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 1
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+Plugin 'jiangmiao/auto-pairs'
+
+" ALE (Asynchronous Lint Engine) is a plugin for providing linting
+Plugin 'w0rp/ale'
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\}
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_sign_error = '🈲'
+let g:ale_sign_warning = '🤔'
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
+" Enable completion where available.
+" let g:ale_completion_enabled = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_column_always = 1
+let g:ale_javascript_eslint_use_global = 0
+" let g:ale_fix_on_save = 1
+" Write this in your vimrc file
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
+
+Plugin 'Yggdroot/indentLine'
+
+Plugin 'mileszs/ack.vim'
+cnoreabbrev ag Gcd <bar> Ack!
+
+" PHP
+Plugin 'StanAngeloff/php.vim'
+Plugin '2072/PHP-Indenting-for-VIm'
+
+" Mysql
+Plugin 'shmup/vim-sql-syntax'
+
+Plugin 'vim-syntastic/syntastic'
+let g:ale_emit_conflict_warnings = 0
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+
+let g:javascript_plugin_jsdoc = 1
+set number
+set runtimepath+=~/.vim_runtime
+"set tabstop=2
+"set shiftwidth=2
+"set expandtab
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType python setlocal shiftwidth=4 tabstop=4
+autocmd FileType php setlocal shiftwidth=4 tabstop=4
+autocmd FileType html setlocal shiftwidth=4 tabstop=4
+autocmd FileType sql setlocal shiftwidth=4 tabstop=4
+
+map <C-m> :NERDTreeToggle<CR>
+
+"source ~/.vim_runtime/vimrcs/basic.vim
+"source ~/.vim_runtime/vimrcs/filetypes.vim
+"source ~/.vim_runtime/vimrcs/plugins_config.vim
+"source ~/.vim_runtime/vimrcs/extended.vim
+
+try
+source ~/.vim_runtime/my_configs.vim
+catch
+endtry
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+" Enable 256 colors palette in Gnome Terminal
+
+if $COLORTERM == 'gnome-terminal'
+   set t_Co=256
+endif
+try
+  colorscheme dracula
+catch
+endtry
+
+set background=dark
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+"set cursorline   " highlight current line
+"set cursorcolumn " highlight current column
+"highlight Cursor guifg=white guibg=black
+set cursorline
+autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
+autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
+
+set cursorcolumn
+autocmd InsertEnter * highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=black guibg=yellow gui=bold
+autocmd InsertLeave * highlight CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold guifg=Black guibg=yellow gui=NONE
+
+set hlsearch
+au BufNewFile,BufRead *.js set filetype=javascript.jsx
+
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
